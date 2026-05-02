@@ -998,6 +998,38 @@
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
         });
+
+        // ============ FACEBOOK PIXEL EVENT TRACKING ============
+        // Track Lead event saat klik tombol daftar/CTA
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                fbq('track', 'Lead');
+                console.log('Lead event tracked');
+            });
+        });
+
+        // Track ViewContent saat klik tombol pricing
+        document.querySelectorAll('.pricing-button').forEach(button => {
+            button.addEventListener('click', function() {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Program Package',
+                    value: 1.0,
+                    currency: 'IDR'
+                });
+                console.log('ViewContent event tracked');
+            });
+        });
+
+        // Track InitiateCheckout saat klik tombol WhatsApp
+        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', function() {
+                fbq('track', 'InitiateCheckout', {
+                    currency: 'IDR',
+                    value: 1.0
+                });
+                console.log('InitiateCheckout event tracked');
+            });
+        });
     </script>
 </body>
 </html>
